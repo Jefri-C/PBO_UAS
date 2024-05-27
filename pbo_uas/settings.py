@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'pbo_uas',
     'rest_framework',
     "categories.apps.CategoriesConfig",
-    'corsheaders',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -86,11 +86,16 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pbo_uas',
         'USER': 'root',
-        'PASSWORD': 'Logiclabs03',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173',
+]
+
 
 
 # Password validation
@@ -136,4 +141,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3030',
+    'http://localhodt:5173'
 ]
