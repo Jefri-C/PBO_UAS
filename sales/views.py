@@ -5,7 +5,7 @@ from pbo_uas.models import Sale, SaleDetails
 from pbo_uas.response import ok_with_msg, ok_with_data, error_with_msg, error_with_data
 import logging
 
-logger = logging.getLogger(__name__)
+
 @api_view(['GET'])
 def getSale(request):
     # get all the data from db
@@ -34,11 +34,24 @@ def addSale(request):
 
 
 @api_view(['POST'])
-def updateSale(request, id):
-    sale = Sale.objects.get(pk=id)
+def updateSale(request):
+    sale_id = request.data.get('id')
+    sale = Sale.objects.get(pk=sale_id)
 
     UpdateSaleSerializer.update(sale, instance=sale, validated_data=request.data)
 
     return ok_with_msg(msg='Sale update successfully!')
 
     # return ok_with_data(serialized.data, msg='ok')
+
+
+@api_view(['DELETE'])
+def deleteSale(request, id):
+    sale = get_object_or_404(Sale, pk=id)
+
+    # delete the product
+    SaleDetails.objects.filter(sale_id=id).delete()
+    sale.delete()
+
+    return ok_with_msg(msg='Sale deleted successfully!')
+
