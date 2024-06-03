@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-2ktbyi0cgw$e)(ff20p$x-y*v!#n&qn-=gzy=kz-6z6*+6l8(%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'randyhg.pythonanywhere.com']
 
 
 # Application definition
@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     'products',
     'pbo_uas',
     'rest_framework',
+    'rest_framework.authtoken',
     "categories.apps.CategoriesConfig",
-    "corsheaders",
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -55,9 +56,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    # 'pbo_uas.middleware.TokenAuthMiddleware',
 ]
 
 ROOT_URLCONF = 'pbo_uas.urls'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
 
 TEMPLATES = [
     {
@@ -81,12 +86,23 @@ WSGI_APPLICATION = 'pbo_uas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'pbo',
+#         'USER': 'root',
+#         'PASSWORD': '123',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pbo_uas',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'Logiclabs03',
         'HOST': 'localhost',
         'PORT': '3306',
     }
